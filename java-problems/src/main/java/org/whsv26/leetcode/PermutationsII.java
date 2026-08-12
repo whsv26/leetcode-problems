@@ -1,5 +1,3 @@
-package org.whsv26.leetcode;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,46 +13,40 @@ import java.util.Set;
 // дубликаты получаются путем перестановки одинаковых элементов
 // можно принять, что у дубликата одинаковые элементы будут использоваться в обратном порядке
 // например: a1,a0 вместо a0,a1
-public class PermutationsII {
+void main() {
+    var actual = permuteUnique(new int[]{1,1,2});
+    assert (actual.equals(
+        List.of(
+            List.of(1,1,2),
+            List.of(1,2,1),
+            List.of(2,1,1)
+        )
+    ));
+}
 
-    public static void main(String[] args) {
-        var solutions = new Solution();
-        var actual = solutions.permuteUnique(new int[]{1,1,2});
-        assert (actual.equals(
-            List.of(
-                List.of(1,1,2),
-                List.of(1,2,1),
-                List.of(2,1,1)
-            )
-        ));
+List<List<Integer>> permuteUnique(int[] nums) {
+    Arrays.sort(nums);
+    var result = new ArrayList<List<Integer>>();
+    backtrack(nums, result, new ArrayList<>(), new HashSet<>());
+    return result;
+}
+
+void backtrack(int[] nums, List<List<Integer>> subsets, List<Integer> subset, Set<Integer> used) {
+    if (subset.size() == nums.length) {
+        subsets.add(subset.stream().toList());
+        return;
     }
 
-    static class Solution {
-        public List<List<Integer>> permuteUnique(int[] nums) {
-            Arrays.sort(nums);
-            var result = new ArrayList<List<Integer>>();
-            backtrack(nums, result, new ArrayList<>(), new HashSet<>());
-            return result;
+    for (int i = 0; i < nums.length; i++) {
+        var isRepeated = i > 0 && nums[i] == nums[i - 1];
+        if (used.contains(i) || isRepeated && !used.contains(i - 1)) {
+            continue;
         }
 
-        void backtrack(int[] nums, List<List<Integer>> subsets, List<Integer> subset, Set<Integer> used) {
-            if (subset.size() == nums.length) {
-                subsets.add(subset.stream().toList());
-                return;
-            }
-
-            for (int i = 0; i < nums.length; i++) {
-                var isRepeated = i > 0 && nums[i] == nums[i - 1];
-                if (used.contains(i) || isRepeated && !used.contains(i - 1)) {
-                    continue;
-                }
-
-                subset.add(nums[i]);
-                used.add(i);
-                backtrack(nums, subsets, subset, used);
-                used.remove(i);
-                subset.removeLast();
-            }
-        }
+        subset.add(nums[i]);
+        used.add(i);
+        backtrack(nums, subsets, subset, used);
+        used.remove(i);
+        subset.removeLast();
     }
 }

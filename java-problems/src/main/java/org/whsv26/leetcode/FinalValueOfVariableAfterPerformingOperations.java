@@ -1,22 +1,14 @@
-package org.whsv26.leetcode;
+void main() {
+    assert (1 == finalValueAfterOperations(new String[]{"--X", "X++", "++X"}));
+}
 
-public class FinalValueOfVariableAfterPerformingOperations {
-
-    public static void main(String[] args) {
-        var solutions = new Solution();
-        assert (1 == solutions.finalValueAfterOperations(new String[]{"--X", "X++", "++X"}));
-    }
-
-    static class Solution {
-        public int finalValueAfterOperations(String[] operations) {
-            var res = 0;
-            for (var operation : operations) {
-                switch (operation) {
-                    case "--X", "X--" -> res--;
-                    case "++X", "X++" -> res++;
-                }
-            }
-            return res;
+int finalValueAfterOperations(String[] operations) {
+    var res = 0;
+    for (var operation : operations) {
+        switch (operation) {
+            case "--X", "X--" -> res--;
+            case "++X", "X++" -> res++;
         }
     }
+    return res;
 }

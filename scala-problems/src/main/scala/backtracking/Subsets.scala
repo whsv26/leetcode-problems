@@ -3,7 +3,7 @@ package backtracking
 
 object Subsets extends App {
   assert {
-    Solution.subsets(Array(1, 2, 3)) == List(
+    ListSolution.subsets(Array(1, 2, 3)) == List(
       List(1, 2, 3),
       List(2, 3),
       List(1, 3),
@@ -15,7 +15,20 @@ object Subsets extends App {
     )
   }
 
-  object Solution {
+  private object ListSolution {
+    def subsets(nums: Array[Int]): List[List[Int]] = {
+      def loop(numbers: List[Int]): List[List[Int]] =
+        numbers match {
+          case Nil => List(Nil)
+          case number :: tail =>
+            loop(tail).flatMap(subset => Array(number :: subset, subset))
+        }
+
+      loop(nums.toList)
+    }
+  }
+
+  private object ArraySolution {
     def subsets(nums: Array[Int]): List[List[Int]] =
       nums match {
         case Array() => List(Nil)
