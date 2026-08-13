@@ -1,19 +1,36 @@
 void main() {
     int[] nums = {-2, 4, 0, 7, -1};
-    int[] positiveNums = positiveNumbers(nums)
-        .stream()
-        .mapToInt(Integer::intValue)
-        .toArray();
 
-    assert Arrays.equals(positiveNums, new int[]{4, 7});
+    assert Arrays.equals(
+        new int[]{4, 7},
+        toArray(positiveNumbers(nums))
+    );
+
+    assert Arrays.equals(
+        new int[]{4, 7},
+        toArray(positiveNumbers1(nums))
+    );
 }
 
 List<Integer> positiveNumbers(int[] nums) {
-    var result = new ArrayList<Integer>();
+    return Arrays.stream(nums)
+        .filter(num -> num > 0)
+        .boxed()
+        .toList();
+}
+
+List<Integer> positiveNumbers1(int[] nums) {
+    var positiveNums = new ArrayList<Integer>();
     for (var num : nums) {
         if (num > 0) {
-            result.add(num);
+            positiveNums.add(num);
         }
     }
-    return result;
+    return positiveNums;
+}
+
+int[] toArray(List<Integer> nums) {
+    return nums.stream()
+        .mapToInt(Integer::intValue)
+        .toArray();
 }
