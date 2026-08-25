@@ -1,9 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
-
 void main() {
     var actual = subsetsWithDup(new int[]{1,2,2});
     assert (actual.equals(
@@ -22,11 +16,16 @@ List<List<Integer>> subsetsWithDup(int[] nums) {
     Arrays.sort(nums);
     var result = new ArrayList<List<Integer>>();
     result.add(Collections.emptyList());
-    backtrack(0, nums, result, new Stack<>());
+    backtrack(0, nums, result, new ArrayDeque<>());
     return result;
 }
 
-void backtrack(int start, int[] nums, List<List<Integer>> subsets, Stack<Integer> subset) {
+void backtrack(
+    int start,
+    int[] nums,
+    List<List<Integer>> subsets,
+    ArrayDeque<Integer> subset
+) {
     if (subset.size() == nums.length) {
         return;
     }
@@ -36,7 +35,7 @@ void backtrack(int start, int[] nums, List<List<Integer>> subsets, Stack<Integer
             continue;
         }
         subset.push(nums[i]);
-        subsets.add(subset.stream().toList());
+        subsets.add(subset.reversed().stream().toList());
         backtrack(i + 1, nums, subsets, subset);
         subset.pop();
     }
