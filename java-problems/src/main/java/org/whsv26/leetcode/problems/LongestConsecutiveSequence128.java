@@ -1,5 +1,3 @@
-// https://leetcode.com/problems/longest-consecutive-sequence
-
 void main() {
     assert 4 == new Solution().longestConsecutive(new int[]{100, 4, 200, 1, 3, 2});
 }

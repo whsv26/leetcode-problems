@@ -1,5 +1,3 @@
-// https://leetcode.com/problems/group-anagrams
-
 void main() {
     assert new Solution().groupAnagrams(new String[]{"abc", "acb", "ac"})
         .equals(List.of(List.of("abc", "acb"), List.of("ac")));

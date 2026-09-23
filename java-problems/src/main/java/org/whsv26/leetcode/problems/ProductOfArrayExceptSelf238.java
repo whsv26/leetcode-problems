@@ -1,5 +1,3 @@
-// https://leetcode.com/problems/longest-consecutive-sequence
-
 void main() {
     assert Arrays.equals(
         new Solution().productExceptSelf(new int[]{1, 2, 3, 4}),
