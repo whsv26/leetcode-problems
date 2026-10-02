@@ -34,10 +34,10 @@ class SolutionPrefix {
         }
 
         int subarrays = 0;
+
         for (int i = 0; i < nums.length; i++) {
             for (int j = i; j < nums.length; j++) {
-                int sum = prefixSum[j + 1] - prefixSum[i];
-                if (sum == k) {
+                if (prefixSum[j + 1] - prefixSum[i] == k) {
                     subarrays++;
                 }
             }
