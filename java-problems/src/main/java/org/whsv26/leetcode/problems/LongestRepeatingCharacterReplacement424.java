@@ -16,7 +16,7 @@ class Solution {
             frequencies[rightChar]++;
             maxFreq = Math.max(maxFreq, frequencies[rightChar]);
 
-            while ((right - left + 1) - maxFreq > k) {
+            if ((right - left + 1) - maxFreq > k) {
                 frequencies[s.charAt(left++) - 'A']--;
             }
 
