@@ -5,15 +5,16 @@ void main() {
 
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        var result = new ArrayList<Integer>();
-
         var targetFrequencies = new int[26];
+
         for (int i = 0; i < p.length(); i++) {
             targetFrequencies[p.charAt(i) - 'a']++;
         }
 
-        var left = 0;
+        var result = new ArrayList<Integer>();
         var frequencies = new int[26];
+        var left = 0;
+
         for (int right = 0; right < s.length(); right++) {
             frequencies[s.charAt(right) - 'a']++;
 
